@@ -13,6 +13,7 @@ table, th, td {
 <h1> 236 Course Finder </h1>
 <h2> <b> BETA </b> but at least one ⊆ should hold :) </h2>
 <p> Updated Jan 24th, 2021 </p>
+<a href="https://github.com/Eladkay/TechnionDependenciesHelper"> GitHub for issues and suggestions </a>
 <p> Enter here the course numbers you took, separated by spaces, and we will tell you what courses you can take! </p>
 <form method="post" action="index.php">
 <input type="textbox" name="courses" value="<?php echo $_POST['courses']; ?>"/>
