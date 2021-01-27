@@ -10,16 +10,21 @@ table, th, td {
 </style>
 </head>
 <body>
-<h1> 236 Course Finder </h1>
-<h2> <b> BETA </b> but at least one ⊆ should hold :) </h2>
-<p> Updated Jan 24th, 2021 </p>
+<center> <h1> Technion Dependency Helper </h1> </center>
+<h2> <b> BETA </b>, report bugs! </h2>
+<p> Updated Jan 27th, 2021 </p>
 <a href="https://github.com/Eladkay/TechnionDependenciesHelper"> GitHub for issues and suggestions </a>
 <p> Enter here the course numbers you took, separated by spaces, and we will tell you what courses you can take! </p>
 <form method="post" action="index.php">
 <input type="textbox" name="courses" value="<?php echo $_POST['courses']; ?>"/>
 <p> Optionally, the first three digits for course numbers to look through (for example, 236 for CS electives like 236363 Database Systems), defaults to 236:
 <input type="textbox" name="digits" value="<?php echo $_POST['digits']; ?>"/> </p>
+<input type="checkbox" name="filter" value="yes" <?php if(isset($_POST["filter"])) echo "checked"; ?>> Filter subjects with no dependencies <br>
 <!-- <input type="submit" name="bidusa"> <-- Bidusa Button </input> <br> <br> !-->
+<input type="checkbox" name="chem" value="yes" <?php if(isset($_POST["chem"])) echo "checked"; ?>> Chemistry classification <br>
+<input type="checkbox" name="phys1" value="yes" <?php if(isset($_POST["phys1"])) echo "checked"; ?>> Physics classification for mechanics <br>
+<input type="checkbox" name="phys2" value="yes" <?php if(isset($_POST["phys2"])) echo "checked"; ?>> Physics classification for electricity <br>
+
 <input type="submit"/>
 </form>
 <br>
@@ -70,15 +75,15 @@ function check_kdamim($course_string, $user_string, $course_name_for_debug) {
 	$courses_took = explode(" ", $user_string);
 	$parsed = parse_course_string($course_string);
 	if(count($parsed) == 0) return true;
+	$flag = false;
 	foreach($parsed as $item_set) {
-		$flag = false;
+		$flag2 = true;
 		foreach($item_set as $item) {
-			$flag2 = true;
 			if(!in_array(trim($item), $courses_took) && !in_array(substr($item, 0, 6), $courses_took)) {
 				$flag2 = false;
 			}
-			if($flag2) $flag = true;
 		}
+		if($flag2) $flag = true;
 	}
 	return $flag;
 }
@@ -95,14 +100,20 @@ if(isset($_POST["bidusa"])) {
 }
 if(!isset($_POST["courses"])) return;
 $digits = "236";
-if(isset($_POST["digits"]) && strlen($_POST["digits"])==3) $digits=$_POST["digits"]; 
+if(isset($_POST["digits"]) && (strlen($_POST["digits"])==3 || $_POST["digits"] == "***")) $digits=$_POST["digits"]; 
 echo "Courses you can take (with the correct tzmudim):<br>";
 $data = json_decode(file_get_contents("courses_202002.json"), true);
 if(!$data) echo "null!";
 echo "<table><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Tzmudim</th></tr>";
+
+$classifications = "";
+if(isset($_POST["chem"]) && $_POST["chem"] == "yes") $classifications .= " 123015 ";
+if(isset($_POST["phys1"]) && $_POST["phys1"] == "yes") $classifications .= "113013 ";
+if(isset($_POST["phys2"]) && $_POST["phys2"] == "yes") $classifications .= "113014";
 foreach($data as $course) {
-	if(substr($course["general"]["מספר מקצוע"], 0, 3) == $digits) {
-		if(!isset($course["general"]["מקצועות קדם"]) || check_kdamim($course["general"]["מקצועות קדם"], $_POST["courses"], $course["general"]["שם מקצוע"])) { 
+	if(substr($course["general"]["מספר מקצוע"], 0, 3) == $digits || $digits == "***") {
+		if(isset($_POST["filter"]) && $_POST["filter"] == "yes" && !isset($course["general"]["מקצועות קדם"])) continue;
+		if(!isset($course["general"]["מקצועות קדם"]) || check_kdamim($course["general"]["מקצועות קדם"], trim($_POST["courses"].$classifications), $course["general"]["שם מקצוע"])) { 
 		        echo "<tr>";
 			if(!isset($course["general"]["מקצועות קדם"])) $kdamim = "";
 			else $kdamim = $course["general"]["מקצועות קדם"];
