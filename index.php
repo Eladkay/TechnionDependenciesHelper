@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 <head>
     <title> Technion Dependencies Helper </title>
@@ -7,6 +8,10 @@
             border-collapse: collapse;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
 <div style="text-align: center;"><h1> Technion Dependency Helper </h1></div>
@@ -14,21 +19,21 @@
 <p> Updated Jan 27th, 2021 </p>
 <a href="https://github.com/Eladkay/TechnionDependenciesHelper"> GitHub for issues and suggestions </a>
 <p> Enter here the course numbers you took, separated by spaces, and we will tell you what courses you can take! </p> <br>
-<form method="post" action="index.php">
+<form method="post">
     <label for="courses">
         Course numbers, separated by spaces:
-    </label>
+    </label> <br>
     <input type="text" name="courses" id="courses" value="<?php echo $_POST['courses']; ?>"/>
 
     <label for="digits">
         Optionally, the first three digits for course numbers to look through (for example, 236 for CS electives like
         236363 Database Systems), defaults to 236:
-    </label>
+    </label> <br>
     <input type="text" name="digits" id="digits" value="<?php echo $_POST['digits']; ?>"/>
 
     <label for="filter">
         Filter subjects with no dependencies
-    </label>
+    </label> <br>
     <input type="checkbox" name="filter" id="filter" value="yes" <?php if (isset($_POST["filter"])) echo "checked"; ?>>  <br>
 
 
@@ -36,17 +41,17 @@
 
     <label for="chem">
         Chemistry classification
-    </label>
+    </label> <br>
     <input type="checkbox" name="chem" id="chem" value="yes" <?php if (isset($_POST["chem"])) echo "checked"; ?>>
 
     <label for="phys1">
         Physics classification for mechanics
-    </label>
+    </label> <br>
     <input type="checkbox" name="phys1" id="phys1" value="yes" <?php if (isset($_POST["phys1"])) echo "checked"; ?>>
 
     <label for="phys2">
         Physics classification for electricity
-    </label>
+    </label> <br>
     <input type="checkbox" name="phys2" id="phys2" value="yes" <?php if (isset($_POST["phys2"])) echo "checked"; ?>>
 
     <input type="submit"/>
