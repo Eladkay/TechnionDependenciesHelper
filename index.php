@@ -153,7 +153,7 @@ if (isset($_POST["digits"])) {
 }
 $data = json_decode(file_get_contents("courses_202002.json"), true);
 if (!$data) echo "null!";
-echo "<table class='table table-hover'>";
+echo "<table class='table table-hover caption-top'>";
 echo "<caption>Courses you can take (with the correct tzmudim):</caption>";
 echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Tzmudim</th></tr>
      </thead><tbody>";
