@@ -151,11 +151,11 @@ if (isset($_POST["digits"])) {
         echo "<div> Input into filter must be exactly three characters long! </div>";
     }
 }
-echo "Courses you can take (with the correct tzmudim):<br>";
 $data = json_decode(file_get_contents("courses_202002.json"), true);
 if (!$data) echo "null!";
-echo "<table class='table table-hover'>
-     <thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Tzmudim</th></tr>
+echo "<table class='table table-hover'>";
+echo "<caption>Courses you can take (with the correct tzmudim):</caption>";
+echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Tzmudim</th></tr>
      </thead><tbody>";
 
 $classifications = "";
