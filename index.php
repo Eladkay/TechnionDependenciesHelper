@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title> Technion Dependencies Helper </title>
     <style>
         table, th, td {
@@ -22,37 +23,42 @@
 <form method="post">
     <label for="courses">
         Course numbers, separated by spaces:
-    </label> <br>
+    </label>
     <input type="text" name="courses" id="courses" value="<?php echo $_POST['courses']; ?>"/>
+    <br><br>
 
     <label for="digits">
         Optionally, the first three digits for course numbers to look through (for example, 236 for CS electives like
         236363 Database Systems), defaults to 236:
-    </label> <br>
+    </label>
     <input type="text" name="digits" id="digits" value="<?php echo $_POST['digits']; ?>"/>
+    <br>
 
+    <input type="checkbox" name="filter" id="filter" value="yes" <?php if (isset($_POST["filter"])) echo "checked"; ?>>
     <label for="filter">
         Filter subjects with no dependencies
-    </label> <br>
-    <input type="checkbox" name="filter" id="filter" value="yes" <?php if (isset($_POST["filter"])) echo "checked"; ?>>  <br>
-
+    </label>
+    <br><br>
 
     <!-- <input type="submit" name="bidusa"> <-- Bidusa Button </input> <br> <br> !-->
 
+    <input type="checkbox" name="chem" id="chem" value="yes" <?php if (isset($_POST["chem"])) echo "checked"; ?>>
     <label for="chem">
         Chemistry classification
-    </label> <br>
-    <input type="checkbox" name="chem" id="chem" value="yes" <?php if (isset($_POST["chem"])) echo "checked"; ?>>
+    </label>
+    <br>
 
+    <input type="checkbox" name="phys1" id="phys1" value="yes" <?php if (isset($_POST["phys1"])) echo "checked"; ?>>
     <label for="phys1">
         Physics classification for mechanics
-    </label> <br>
-    <input type="checkbox" name="phys1" id="phys1" value="yes" <?php if (isset($_POST["phys1"])) echo "checked"; ?>>
+    </label>
+    <br>
 
+    <input type="checkbox" name="phys2" id="phys2" value="yes" <?php if (isset($_POST["phys2"])) echo "checked"; ?>>
     <label for="phys2">
         Physics classification for electricity
-    </label> <br>
-    <input type="checkbox" name="phys2" id="phys2" value="yes" <?php if (isset($_POST["phys2"])) echo "checked"; ?>>
+    </label>
+    <br>
 
     <input type="submit"/>
 </form>
