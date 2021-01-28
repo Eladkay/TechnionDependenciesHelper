@@ -54,7 +54,7 @@
             <input class="form-check-input" type="checkbox" name="filter_equiv" id="filter_equiv"
                    value="yes" <?php if (isset($_POST["filter_equiv"])) echo "checked"; ?>>
             <label class="form-check-label" for="filter_equiv">
-                Filter subjects that overlap or are incorporated in courses you have already completed
+                Filter subjects that overlap with, are incorporated in, or incorporate courses you have already completed
             </label>
         </div>
 
@@ -195,7 +195,11 @@
                     $incorporated = explode(" ", trim($course["general"]["מקצועות ללא זיכוי נוסף (מוכלים)"]));
                 else $incorporated = array();
 
-                $total_no_additional_credit = array_merge($no_additional_credit, $incorporated);
+                if(isset($course["general"]["מקצועות ללא זיכוי נוסף (מכילים)"]))
+                    $incorporating = explode(" ", trim($course["general"]["מקצועות ללא זיכוי נוסף (מכילים)"]));
+                else $incorporating = array();
+
+                $total_no_additional_credit = array_merge($no_additional_credit, $incorporated, $incorporating);
                 $flag = false;
                 foreach($total_no_additional_credit as $included_course) {
                     if(in_array($included_course, $courses_took)) $flag = true;
