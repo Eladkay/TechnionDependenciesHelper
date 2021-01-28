@@ -146,11 +146,12 @@ if (isset($_POST["bidusa"])) {
 }
 if (!isset($_POST["courses"])) return;
 $digits = "***";
-if (isset($_POST["digits"]))
+if (isset($_POST["digits"])) {
     if(strlen($_POST["digits"]) == 3) $digits = $_POST["digits"];
-    else {
+    else if(strlen($_POST["digits"]) != 0) {
         echo "<div> Input into filter must be exactly three characters long! </div>";
     }
+}
 echo "Courses you can take (with the correct tzmudim):<br>";
 $data = json_decode(file_get_contents("courses_202002.json"), true);
 if (!$data) echo "null!";
