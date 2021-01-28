@@ -49,6 +49,13 @@
             <label class="form-check-label" for="filter">
                 Filter subjects with no dependencies
             </label>
+            <br>
+
+            <input class="form-check-input" type="checkbox" name="filter_equiv" id="filter_equiv"
+                   value="yes" <?php if (isset($_POST["filter_equiv"])) echo "checked"; ?>>
+            <label class="form-check-label" for="filter_equiv">
+                Filter subjects that overlap or are incorporated in courses you have already completed
+            </label>
         </div>
 
         <!-- <input type="submit" name="bidusa"> <-- Bidusa Button </input> <br> <br> !-->
@@ -178,6 +185,16 @@
         if (substr($course["general"]["מספר מקצוע"], 0, 3) == $digits || $digits == "***") {
             if (isset($_POST["filter"]) && $_POST["filter"] == "yes" && !isset($course["general"]["מקצועות קדם"])) continue;
             if (in_array($course["general"]["מספר מקצוע"], $courses_took)) continue;
+            if (isset($_POST["filter_equiv"]) && $_POST["filter_equiv"] == "yes") {
+                $no_additional_credit = $course["general"]["מקצועות ללא זיכוי נוסף"]; // assuming these relations are symmetric
+                $incorporated = $course["general"]["מקצועות ללא זיכוי נוסף (מוכלים)"];
+                $total_no_additional_credit = array_merge($no_additional_credit, $incorporated);
+                $flag = false;
+                foreach($total_no_additional_credit as $included_course) {
+                    if(in_array($included_course, $courses_took)) $flag = true;
+                }
+                if($flag) continue;
+            }
             if (!isset($course["general"]["מקצועות קדם"]) || check_kdamim($course["general"]["מקצועות קדם"], $courses_took)) {
                 echo "<tr>";
                 if (!isset($course["general"]["מקצועות קדם"])) $kdamim = "";
