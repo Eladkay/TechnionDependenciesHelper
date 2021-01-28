@@ -71,7 +71,6 @@
         <div style="text-align: center;"><input type="submit"/></div>
     </form>
     <br>
-</div>
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
@@ -180,5 +179,6 @@ foreach ($data as $course) {
 }
 echo "</tbody></table>";
 ?>
+</div>
 </body>
 </html>
