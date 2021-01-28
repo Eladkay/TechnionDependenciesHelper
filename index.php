@@ -188,11 +188,11 @@
             if (isset($_POST["filter_equiv"]) && $_POST["filter_equiv"] == "yes") {
                 // assuming these relations are symmetric
                 if(isset($course["general"]["מקצועות ללא זיכוי נוסף"]))
-                    $no_additional_credit = explode(" ", $course["general"]["מקצועות ללא זיכוי נוסף"]);
+                    $no_additional_credit = explode(" ", $course["general"]["מקצועות ללא זיכוי נוסף"]); 
                 else $no_additional_credit = array();
 
                 if(isset($course["general"]["מקצועות ללא זיכוי נוסף (מוכלים)"]))
-                    $incorporated = explode(" ", trim($course["general"]["מקצועות ללא זיכוי נוסף (מוכלים)"]));
+                    $incorporated = explode(" ", trim($course["general"]["מקצועות ללא זיכוי נוסף (מוכלים)"]));
                 else $incorporated = array();
 
                 $total_no_additional_credit = array_merge($no_additional_credit, $incorporated);
