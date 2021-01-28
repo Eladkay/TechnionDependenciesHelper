@@ -186,8 +186,12 @@
             if (isset($_POST["filter"]) && $_POST["filter"] == "yes" && !isset($course["general"]["מקצועות קדם"])) continue;
             if (in_array($course["general"]["מספר מקצוע"], $courses_took)) continue;
             if (isset($_POST["filter_equiv"]) && $_POST["filter_equiv"] == "yes") {
-                $no_additional_credit = $course["general"]["מקצועות ללא זיכוי נוסף"]; // assuming these relations are symmetric
-                $incorporated = $course["general"]["מקצועות ללא זיכוי נוסף (מוכלים)"];
+                if(isset($course["general"]["מקצועות ללא זיכוי נוסף"]))
+                    $no_additional_credit = $course["general"]["מקצועות ללא זיכוי נוסף"]; // assuming these relations are symmetric
+                else $no_additional_credit = array();
+                if(isset($course["general"]["מקצועות ללא זיכוי נוסף (מוכלים)"]))
+                    $incorporated = $course["general"]["מקצועות ללא זיכוי נוסף (מוכלים)"];
+                else $incorporated = array();
                 $total_no_additional_credit = array_merge($no_additional_credit, $incorporated);
                 $flag = false;
                 foreach($total_no_additional_credit as $included_course) {
