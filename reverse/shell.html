@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Reverse Technion Dependencies Helper </title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<div class="container">
+
+    <div style="text-align: center;"><h1> Reverse Technion Dependency Helper </h1></div>
+    <h2><b> BETA </b>, report bugs! </h2>
+    <p> Updated Feb 25th, 2021 </p>
+    <a href="https://github.com/Eladkay/TechnionDependenciesHelper"> GitHub for issues and suggestions </a>
+    <p> Enter here the course numbers you took, separated by spaces, and we will tell you what courses you need in order to take CS electives! </p> <br>
+    <form method="post">
+        <div class="input-group">
+            <label for="courses">
+                Course numbers, separated by spaces:&nbsp;&nbsp;&nbsp;
+            </label>
+            <input type="text" class="form-control" name="courses" id="courses"/>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="filter" id="filter" value="yes">
+            <label class="form-check-label" for="filter">
+                Filter subjects with no dependencies
+            </label>
+
+            <input class="form-check-input" type="checkbox" name="filter_equiv" id="filter_equiv" value="yes">
+            <label class="form-check-label" for="filter_equiv">
+                Filter subjects that overlap with, are incorporated in, or incorporate courses you have already completed
+            </label>
+        </div>
+        <br>
+
+        <div style="text-align: center;"><input type="submit"/></div>
+    </form>
+    <br>
+</div>
+</body>
+</html>
