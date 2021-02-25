@@ -123,7 +123,7 @@
 
     if (!isset($_POST["courses"])) return;
     $digits = "236";
-    $data = json_decode(file_get_contents("courses_202002.json"), true);
+    $data = json_decode(file_get_contents("../courses_202002.json"), true);
     if (!$data) echo "null!";
     echo "<table class='table table-hover caption-top'>";
     echo "<caption>Elective Courses in CS:</caption>";
