@@ -22,7 +22,7 @@
 
     <div style="text-align: center;"><h1> Reverse Technion Dependency Helper </h1></div>
     <h2><b> BETA </b>, report bugs! </h2>
-    <p> Updated Feb 25th, 2021 </p>
+    <p> Updated June 29th, 2021 </p>
     <a href="https://github.com/Eladkay/TechnionDependenciesHelper"> GitHub for issues and suggestions </a>
     <p> Enter here the course numbers you took, separated by spaces, and we will tell you what courses you need in order
         to take CS electives! </p> <br>
