@@ -1,2 +1,2 @@
 # TechnionDependenciesHelper
-https://eladkay.codes/TechnionDependenciesHelper
+https://eladkay.com/TechnionDependenciesHelper
