@@ -141,7 +141,7 @@
         $preqs_list = array_map($to_ugified, $course->{"preqs"});
         $adjs_list = array_map($to_ugified, $course->{"adjs"});
         $preqs = join(" and ", $preqs_list);
-        echo $course->{"preqs"};
+        echo join(" and ", $course->{"preqs"});
         $adjs = join(" or ", $adjs_list);
         echo "<tr>";
         echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
