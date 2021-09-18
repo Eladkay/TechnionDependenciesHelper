@@ -108,6 +108,13 @@
     }
     $to_json = array();
     $to_json["courses"] = $list;
+    $to_json["exclude_no_deps"] = isset($_POST["filter"]) && $_POST["filter"] == "yes";
+    $to_json["exclude_contained"] = isset($_POST["filter_equiv"]) && $_POST["filter_equiv"] == "yes";
+    $to_json["phys_mech"] = isset($_POST["phys1"]) && $_POST["phys1"] == "yes";
+    $to_json["phys_elec"] = isset($_POST["phys2"]) && $_POST["phys2"] == "yes";
+    $to_json["chem"] = isset($_POST["chem"]) && $_POST["chem"] == "yes";
+    if(isset($_POST["digits"]))
+        $to_json["filter"] = $_POST["digits"];
     $json = json_encode($to_json);
     echo $json;
     $url = 'https://eladkay.com:3001/get_possible_courses/';
