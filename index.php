@@ -23,7 +23,7 @@
     <div style="text-align: center;"><h1> Technion Dependency Helper </h1></div>
     <h2><b> BETA </b>, report bugs! </h2>
     <p> Updated Sep 18th, 2021 </p>
-    <p> <strong>Now available!</strong> <a href="/lookup">Lookup</a> and <a href="/tree">Deps. Tree</a></p>
+    <p> <strong>Now available!</strong> <a href="lookup">Lookup</a> and <a href="tree">Deps. Tree</a></p>
     <a href="https://github.com/Eladkay/TechnionDependenciesHelper"> GitHub for issues and suggestions </a>
     <p> Enter here the course numbers you took, in any format, and we will tell you what courses you can
         take! </p> <br>
