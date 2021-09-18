@@ -112,7 +112,7 @@ def get_possible_courses(request):
                     deps_set_used = course_numbers
                     adjs = map(lambda x: x.required, models.Adjacent.objects.all().filter(requires=course.course_number))
                     ret.add((course, adjs))
-        return Response(map(lambda x: {"name": x[0].name, "number": x[0].course_number, "pts": x[0].points, "preqs": x[0].original_preqs, "adjs": x[2]}, ret), status=status.HTTP_200_OK)
+        return Response(map(lambda x: {"name": x[0].name, "number": x[0].course_number, "pts": x[0].points, "preqs": x[0].original_preqs, "adjs": x[1]}, ret), status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
