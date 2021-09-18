@@ -98,8 +98,7 @@ def get_possible_courses(request):
                     continue
             preqs = models.Prerequisite.objects.all().filter(later_course=course.course_number)
             if not preqs and not exclude_no_deps:
-                adjs = list(map(lambda x: x.required, models.Adjacent.objects.all().filter(requires=course.course_number)))
-                ret.add((course, adjs))
+                ret.add(course)
             for preq_set in preqs:
                 courses_in_set = models.PrerequisiteSet.objects.all().filter(prerequisite_id=preq_set)
                 course_numbers = map(lambda x: x.earlier_course, courses_in_set)
@@ -108,11 +107,10 @@ def get_possible_courses(request):
                     if cn not in courses:
                         flag = False
                 if flag:
-                    adjs = map(lambda x: x.required, models.Adjacent.objects.all().filter(requires=course.course_number))
-                    ret.add((course, adjs))
-        result = map(lambda x: {"name": x[0].name, "number": x[0].course_number, "pts": x[0].points,
-                       "preqs": x[0].original_preqs, "adjs": x[1]}, ret)
-        return Response(list(set(sorted(result, key=lambda x: x["number"]))), status=status.HTTP_200_OK)
+                    ret.add(course)
+        result = map(lambda x: {"name": x.name, "number": x.course_number, "pts": x.points,
+                       "preqs": x.original_preqs, "adjs": x.original_adjs}, ret)
+        return Response(sorted(result, key=lambda x: x["number"]), status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
