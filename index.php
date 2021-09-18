@@ -140,13 +140,11 @@
         };
         $preqs_list = array_map($to_ugified, $course->{"preqs"});
         $adjs_list = array_map($to_ugified, $course->{"adjs"});
-        $preqs = join(" and ", $preqs_list);
-        echo join(" and ", $course->{"preqs"});
+        $preqs = join(" and ", $preqs_list);;
         $adjs = join(" or ", $adjs_list);
         echo "<tr>";
         echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
-            "</p></td><td><p dir=\"rtl\">" . $preqs . "</p></td><td><p dir=\"rtl\">" .
-            $adjs . "</p></td><td><a href='https://ug3.technion.ac.il/rishum/course/".$course->{"number"}."/202101'>Here</a></td>";
+            "</p></td><td>$preqs</td><td>$adjs</td><td><a href='https://ug3.technion.ac.il/rishum/course/".$course->{"number"}."/202101'>Here</a></td>";
         echo "</tr>";
 
     }
