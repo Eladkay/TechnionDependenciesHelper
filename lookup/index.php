@@ -45,7 +45,7 @@
     echo "<caption>Courses for which the given course is a dependency:</caption>";
     echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Adjacent (Tzmudim)</th></tr>
      </thead><tbody>";
-    $course = trim($_POST["courses"]);
+    $course = trim($_POST["course"]);
 
     $to_json = array();
     $to_json["course"] = $course;
