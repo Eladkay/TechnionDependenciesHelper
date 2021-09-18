@@ -88,8 +88,9 @@
     </form>
     <br>
     <?php
-
+    if(isset($_POST['courses'])) return;
     echo "<table class='table table-hover caption-top'>";
+
     echo "<caption>Courses you can take (with the correct tzmudim):</caption>";
     echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Tzmudim</th></tr>
      </thead><tbody>";
@@ -97,9 +98,16 @@
     $matches = array();
     preg_match_all("(\\d{5,6})", $courses_took, $matches);
     $list = [];
-    foreach ($matches as $match) {
-        print_r($match);
+    $match = $matches[0];
+    foreach ($match as $cn) {
+        if(strlen($cn) == 6)
+            $list[] = $cn;
+        else $list[] = "0".$cn;
     }
+    $to_json = array();
+    $to_json["courses"] = $list;
+    $json = json_encode($to_json);
+    echo $json;
 //    foreach ($data as $course) {
 //            if (!isset($course["general"]["מקצועות קדם"]) || check_kdamim($course["general"]["מקצועות קדם"], $courses_took)) {
 //                echo "<tr>";
