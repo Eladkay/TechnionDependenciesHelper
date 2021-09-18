@@ -135,7 +135,7 @@
 
     foreach (json_decode($result) as $course) {
         $to_ugified = function($val) {
-            return "<a href='https://ug3.technion.ac.il/rishum/course/$val/202101'>$val</a>";
+            return "<a href='https://ug3.technion.ac.il/rishum/course/$val[0]/202101'>$val[0]</a>";
         };
         $preqs = preg_replace_callback("(\\d{5,6})", $to_ugified, $course->{"preqs"});
         $adjs_list = array_map($to_ugified, $course->{"adjs"});
