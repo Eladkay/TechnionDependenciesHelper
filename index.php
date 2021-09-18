@@ -144,8 +144,10 @@
         $preqs = preg_replace_callback("/(\d{5,6})/", $to_ugified, $preqs);
         $preqs = preg_replace("(או)", "or ", $preqs);
         $preqs = preg_replace("(ו-)", "and ", $preqs);
-        $adjs_list = array_map($to_ugified2, $course->{"adjs"});
-        $adjs = join(" or ", $adjs_list);
+
+        $adjs = preg_replace_callback("/(\d{5,6})/", $to_ugified, $course->{"adjs"});
+        $adjs = preg_replace("(\s)", " or ", $adjs);
+
         echo "<tr>";
         echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
             "</p></td><td>$preqs</td><td>$adjs</td><td><a href='https://ug3.technion.ac.il/rishum/course/".$course->{"number"}."/202101'>Here</a></td>";
