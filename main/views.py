@@ -112,7 +112,7 @@ def get_possible_courses(request):
                     ret.add((course, adjs))
         result = map(lambda x: {"name": x[0].name, "number": x[0].course_number, "pts": x[0].points,
                        "preqs": x[0].original_preqs, "adjs": x[1]}, ret)
-        return Response(set(sorted(result, key=lambda x: x["number"])), status=status.HTTP_200_OK)
+        return Response(list(set(sorted(result, key=lambda x: x["number"]))), status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
