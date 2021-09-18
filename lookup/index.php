@@ -20,10 +20,11 @@
 <body>
 <div class="container">
 
-    <div style="text-align: center;"><h1> Technion Dependency Helper </h1></div>
+    <div style="text-align: center;"><h1> Technion Dependency Helper v2</h1></div>
     <h2><b> BETA </b>, report bugs! </h2>
     <p> Updated Sep 18th, 2021 </p>
     <a href="https://github.com/Eladkay/TechnionDependenciesHelper"> GitHub for issues and suggestions </a>
+    <p> <strong>Now available!</strong> <a href="/lookup">Lookup</a> and <a href="/tree">Deps. Tree</a></p>
     <p> Enter here a course number, and we will tell you to what courses it is a dependency! </p> <br>
     <form method="post">
         <div class="input-group">
