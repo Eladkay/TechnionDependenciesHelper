@@ -110,21 +110,23 @@
     $to_json["courses"] = $list;
     $json = json_encode($to_json);
     echo $json;
-    $url = 'http://eladkay.com:3001/';
+    $url = 'https://eladkay.com:3001/';
+    $fields_string = http_build_query($to_json);
 
-    // use key 'http' even if you send the request to https://...
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/json\r\n",
-            'method'  => 'POST',
-            'content' => $json
-        )
-    );
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    if ($result === FALSE) { echo "ERROR"; }
+    //open connection
+    $ch = curl_init();
 
-    var_dump($result);
+    //set the url, number of POST vars, POST data
+    curl_setopt($ch,CURLOPT_URL, $url);
+    curl_setopt($ch,CURLOPT_POST, true);
+    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+
+    //So that curl_exec returns the contents of the cURL; rather than echoing it
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+
+    //execute post
+    $result = curl_exec($ch);
+    echo $result;
 //    foreach ($data as $course) {
 //            if (!isset($course["general"]["מקצועות קדם"]) || check_kdamim($course["general"]["מקצועות קדם"], $courses_took)) {
 //                echo "<tr>";
