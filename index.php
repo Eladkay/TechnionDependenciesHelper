@@ -139,9 +139,10 @@
             return "<a href='https://ug3.technion.ac.il/rishum/course/$val/202101'>$val</a>";
         };
         $preqs = preg_replace("/\s+/", "", $course->{"preqs"});
+        $preqs = preg_replace('/[\x00-\x1F\x7F]/u', '', $preqs);
         $preqs = preg_replace_callback("/(\d{5,6})/", $to_ugified, $preqs);
-        $preqs = preg_replace("(או)", "or ", $preqs);
-        $preqs = preg_replace("(ו-)", "and ", $preqs);
+        $preqs = preg_replace("(או)", " or ", $preqs);
+        $preqs = preg_replace("(ו-)", " and ", $preqs);
 
         $adjs = preg_replace_callback("/(\d{5,6})/", $to_ugified, $course->{"adjs"});
         $adjs = preg_replace("(\s)", " or ", $adjs);
