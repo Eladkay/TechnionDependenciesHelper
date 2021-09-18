@@ -95,7 +95,7 @@
     echo "<table class='table table-hover caption-top'>";
 
     echo "<caption>Courses you can take (with the correct tzmudim):</caption>";
-    echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Tzmudim</th></tr>
+    echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Tzmudim</th><th>UG Link</th></tr>
      </thead><tbody>";
     $courses_took = trim($_POST["courses"]);
     $matches = array();
@@ -137,7 +137,7 @@
         echo "<tr>";
         echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
             "</p></td><td><p dir=\"rtl\">" . $course->{"preqs"} . "</p></td><td><p dir=\"rtl\">" .
-            $course->{"adjs"} . "</p></td>";
+            $course->{"adjs"} . "</p></td><td><a href='https://ug3.technion.ac.il/rishum/course/".$course->{"number"}."/202101'></a></td>";
         echo "</tr>";
 
     }
