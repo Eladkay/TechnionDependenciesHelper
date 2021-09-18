@@ -51,7 +51,7 @@
     $to_json["course"] = $course;
     $json = json_encode($to_json);
     $url = 'https://eladkay.com:3001/get_dependent_courses/';
-
+    echo $json;
     //open connection
     $ch = curl_init($url);
 
