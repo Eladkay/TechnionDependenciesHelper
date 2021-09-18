@@ -54,7 +54,8 @@
             <input class="form-check-input" type="checkbox" name="filter_equiv" id="filter_equiv"
                    value="yes" checked>
             <label class="form-check-label" for="filter_equiv">
-                Filter subjects that overlap with, are incorporated in, or incorporate courses you have already completed
+                Filter subjects that overlap with, are incorporated in, or incorporate courses you have already
+                completed
             </label>
         </div>
 
@@ -88,7 +89,7 @@
     </form>
     <br>
     <?php
-    if(!isset($_POST['courses'])) return;
+    if (!isset($_POST['courses'])) return;
     error_reporting(E_ALL);
     ini_set('display_errors', 'on');
     echo "<table class='table table-hover caption-top'>";
@@ -102,50 +103,42 @@
     $list = [];
     $match = $matches[0];
     foreach ($match as $cn) {
-        if(strlen($cn) == 6)
+        if (strlen($cn) == 6)
             $list[] = $cn;
-        else $list[] = "0".$cn;
+        else $list[] = "0" . $cn;
     }
     $to_json = array();
     $to_json["courses"] = $list;
     $to_json["exclude_no_deps"] = isset($_POST["filter"]) && $_POST["filter"] == "yes";
     $to_json["exclude_contained"] = isset($_POST["filter_equiv"]) && $_POST["filter_equiv"] == "yes";
-    if(isset($_POST["phys1"]) && $_POST["phys1"] == "yes") $to_json["phys_mech"] = true;
-    if(isset($_POST["phys2"]) && $_POST["phys2"] == "yes") $to_json["phys_elec"] = true;
-    if(isset($_POST["chem"]) && $_POST["chem"] == "yes") $to_json["chem"] = true;
-    if(isset($_POST["digits"])) $to_json["filter"] = $_POST["digits"];
+    if (isset($_POST["phys1"]) && $_POST["phys1"] == "yes") $to_json["phys_mech"] = true;
+    if (isset($_POST["phys2"]) && $_POST["phys2"] == "yes") $to_json["phys_elec"] = true;
+    if (isset($_POST["chem"]) && $_POST["chem"] == "yes") $to_json["chem"] = true;
+    if (isset($_POST["digits"])) $to_json["filter"] = $_POST["digits"];
     $json = json_encode($to_json);
-    echo $json;
     $url = 'https://eladkay.com:3001/get_possible_courses/';
 
     //open connection
     $ch = curl_init($url);
 
     //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_POST, true);
-    curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-    curl_setopt($ch,CURLOPT_POSTFIELDS, $json);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
 
     //So that curl_exec returns the contents of the cURL; rather than echoing it
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
     //execute post
     $result = curl_exec($ch);
-    echo $result;
     curl_close($ch);
 
-    //    foreach ($data as $course) {
-//            if (!isset($course["general"]["מקצועות קדם"]) || check_kdamim($course["general"]["מקצועות קדם"], $courses_took)) {
-//                echo "<tr>";
-//                if (!isset($course["general"]["מקצועות קדם"])) $kdamim = "";
-//                else $kdamim = $course["general"]["מקצועות קדם"];
-//                if (!isset($course["general"]["מקצועות צמודים"])) $tzmudim = "";
-//                else $tzmudim = $course["general"]["מקצועות צמודים"];
-//                echo "<td>" . $course["general"]["מספר מקצוע"] . "</td><td><p dir=\"rtl\">" . $course["general"]["שם מקצוע"] . "</p></td><td><p dir=\"rtl\">" . $kdamim . "</p></td><td><p dir=\"rtl\">" . $tzmudim . "</p></td>";
-//                echo "</tr>";
-//            }
-//
-//    }
+    foreach (json_decode($result) as $course) {
+        echo "<tr>";
+        echo "<td>" . $course["number"] . "</td><td><p dir=\"rtl\">" . $course["name"] . "</p></td><td><p dir=\"rtl\">" . $course["prereqs"] . "</p></td><td><p dir=\"rtl\">" . $course["adjs"] . "</p></td>";
+        echo "</tr>";
+
+    }
     echo "</tbody></table>";
     ?>
 </div>
