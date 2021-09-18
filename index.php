@@ -59,8 +59,6 @@
             </label>
         </div>
 
-        <!-- <input type="submit" name="bidusa"> <-- Bidusa Button </input> <br> <br> !-->
-
         <div class="form-check">
             <input class="form-check-input" type="checkbox" name="chem" id="chem"
                    value="yes" <?php if (isset($_POST["chem"])) echo "checked"; ?>>
@@ -95,7 +93,7 @@
     echo "<table class='table table-hover caption-top'>";
 
     echo "<caption>Courses you can take (with the correct tzmudim):</caption>";
-    echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements Fulfilled</th><th>Tzmudim</th><th>UG Link</th></tr>
+    echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Adjacent (Tzmudim)</th><th>UG Link</th></tr>
      </thead><tbody>";
     $courses_took = trim($_POST["courses"]);
     $matches = array();
