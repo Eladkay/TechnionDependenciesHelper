@@ -109,8 +109,8 @@ def get_possible_courses(request):
                     if cn not in courses:
                         flag = False
                 if flag:
-                    deps_set_used = list(course_numbers)
-                    adjs = list(map(lambda x: x.required, models.Adjacent.objects.all().filter(requires=course.course_number)))
+                    deps_set_used = course_numbers
+                    adjs = map(lambda x: x.required, models.Adjacent.objects.all().filter(requires=course.course_number))
                     ret.add((course, deps_set_used, adjs))
         return Response(map(lambda x: {"name": x[0].name, "number": x[0].course_number, "pts": x[0].points, "preqs": x[1], "adjs": x[2]}, ret), status=status.HTTP_200_OK)
     except Exception as e:
