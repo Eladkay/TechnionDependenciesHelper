@@ -89,6 +89,8 @@
     <br>
     <?php
     if(!isset($_POST['courses'])) return;
+    error_reporting(E_ALL);
+    ini_set('display_errors', 'on');
     echo "<table class='table table-hover caption-top'>";
 
     echo "<caption>Courses you can take (with the correct tzmudim):</caption>";
