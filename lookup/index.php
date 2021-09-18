@@ -31,7 +31,7 @@
                 Course number:&nbsp;&nbsp;&nbsp;
             </label>
             <input type="text" class="form-control" name="course" id="course"
-                   value="<?php echo strip_tags($_POST['course']); ?>"/>
+                   value="<?php echo htmlspecialchars(strip_tags($_POST['course'])); ?>"/>
         </div>
 
 

@@ -33,14 +33,14 @@
                 String containing course numbers:&nbsp;&nbsp;&nbsp;
             </label>
             <input type="text" class="form-control" name="courses" id="courses"
-                   value="<?php echo strip_tags($_POST['courses']); ?>"/>
+                   value="<?php echo htmlspecialchars(strip_tags($_POST['courses'])); ?>"/>
         </div>
         <br>
         <div class="input-group">
             <label for="digits">
                 Optionally, filter only courses whose course numbers contain this string: &nbsp;&nbsp;&nbsp;
             </label>
-            <input type="text" class="form-control" name="digits" id="digits" value="<?php echo strip_tags($_POST['digits']); ?>"/>
+            <input type="text" class="form-control" name="digits" id="digits" value="<?php echo htmlspecialchars(strip_tags($_POST['digits'])); ?>"/>
             <br>
         </div>
 
