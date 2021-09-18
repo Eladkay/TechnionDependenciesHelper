@@ -136,11 +136,12 @@
     foreach (json_decode($result) as $course) {
         $preqs = "";
         $to_ugified = function($val) {
-            return "<a href='https://ug3.technion.ac.il/rishum/course/".$val."/202101'>Here</a>";
+            return "<a href='https://ug3.technion.ac.il/rishum/course/$val/202101'>$val</a>";
         };
         $preqs_list = array_map($to_ugified, $course->{"preqs"});
         $adjs_list = array_map($to_ugified, $course->{"adjs"});
         $preqs = join(" and ", $preqs_list);
+        echo $course->{"preqs"};
         $adjs = join(" or ", $adjs_list);
         echo "<tr>";
         echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
