@@ -134,7 +134,7 @@
     curl_close($ch);
 
     foreach (json_decode($result) as $course) {
-        print_r($course);
+        foreach ($course as $item) echo $item . " ";
         echo "<tr>";
         echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
             "</p></td><td><p dir=\"rtl\">" . $course->{"preqs"} . "</p></td><td><p dir=\"rtl\">" .
