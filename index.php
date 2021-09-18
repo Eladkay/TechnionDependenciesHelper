@@ -111,15 +111,14 @@
     $json = json_encode($to_json);
     echo $json;
     $url = 'https://eladkay.com:3001/get_possible_courses/';
-    $fields_string = http_build_query($json);
 
     //open connection
-    $ch = curl_init();
+    $ch = curl_init($url);
 
     //set the url, number of POST vars, POST data
-    curl_setopt($ch,CURLOPT_URL, $url);
     curl_setopt($ch,CURLOPT_POST, true);
-    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+    curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    curl_setopt($ch,CURLOPT_POSTFIELDS, $json);
 
     //So that curl_exec returns the contents of the cURL; rather than echoing it
     curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
@@ -127,7 +126,9 @@
     //execute post
     $result = curl_exec($ch);
     echo $result;
-//    foreach ($data as $course) {
+    curl_close($ch);
+
+    //    foreach ($data as $course) {
 //            if (!isset($course["general"]["מקצועות קדם"]) || check_kdamim($course["general"]["מקצועות קדם"], $courses_took)) {
 //                echo "<tr>";
 //                if (!isset($course["general"]["מקצועות קדם"])) $kdamim = "";
