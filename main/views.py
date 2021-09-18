@@ -61,24 +61,28 @@ def create_courses_database(req):
 @api_view(['POST'])
 def get_possible_courses(request):
     try:
-        if "courses" not in request.data:
-            return Response({"message": f"no courses were submitted, data is {request.data}"}, status=status.HTTP_400_BAD_REQUEST)
-        courses = request.data["courses"]
+        data = request.data
+        if "_content" in data: # for debug
+            data = json.loads(request.data["_content"])
+            print(request.data["_content"])
+        if "courses" not in data:
+            return Response({"message": f"no courses were submitted, data is {data}"}, status=status.HTTP_400_BAD_REQUEST)
+        courses = data["courses"]
         exclude_no_deps = False
-        if "exclude_no_deps" in request.data:
-            exclude_no_deps = request.data["exclude_no_deps"]
+        if "exclude_no_deps" in data:
+            exclude_no_deps = data["exclude_no_deps"]
         exclude_contained = False
-        if "exclude_contained" in request.data:
-            exclude_contained = request.data["exclude_contained"]
-        if "physics_mech" in request.data:
+        if "exclude_contained" in data:
+            exclude_contained = data["exclude_contained"]
+        if "physics_mech" in data:
             courses += ["113013"]
-        if "physics_elec" in request.data:
+        if "physics_elec" in data:
             courses += ["113014"]
-        if "chem" in request.data:
+        if "chem" in data:
             courses += ["123015"]
         filter = ""
-        if "filter" in request.data:
-            filter = request.data["filter"]
+        if "filter" in data:
+            filter = data["filter"]
         ret = set()
         deps_set_used = []
         for course in models.Course.objects.all():
@@ -108,9 +112,13 @@ def get_possible_courses(request):
                         flag = False
                 if flag:
                     ret.add(course)
-        result = map(lambda x: {"name": x.name, "number": x.course_number, "pts": x.points,
-                       "preqs": x.original_preqs, "adjs": x.original_adjs}, ret)
-        return Response(sorted(result, key=lambda x: x["number"]), status=status.HTTP_200_OK)
+        result = map(lambda x: {"name": x.name, "number": x.course_number, "pts": float(str(x.points)),
+                       "preqs": x.original_preqs.replace(u'\xa0', u''), "adjs": x.original_adjs.replace(u'\xa0', u'')}, ret)
+        f = open("test.json", "w", encoding="utf8")
+        v = sorted(result, key=lambda x: x["number"])
+        f.write(str(v[0]))
+        f.close()
+        return Response(v, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
