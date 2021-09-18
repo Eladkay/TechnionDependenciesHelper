@@ -66,8 +66,9 @@
     //execute post
     $result = curl_exec($ch);
     curl_close($ch);
-
+    echo($result);
     foreach (json_decode($result) as $course) {
+
         $to_ugified = function($val) {
             return "<a href='https://ug3.technion.ac.il/rishum/course/$val[0]/202101'>$val[0]</a>";
         };
