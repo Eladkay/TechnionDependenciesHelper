@@ -51,7 +51,6 @@
     $to_json["course"] = $course;
     $json = json_encode($to_json);
     $url = 'https://eladkay.com:3001/get_dependent_courses/';
-    echo $json;
     //open connection
     $ch = curl_init($url);
 
@@ -66,7 +65,6 @@
     //execute post
     $result = curl_exec($ch);
     curl_close($ch);
-    echo($result);
     foreach (json_decode($result) as $course) {
 
         $to_ugified = function($val) {
