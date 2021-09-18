@@ -135,7 +135,9 @@
 
     foreach (json_decode($result) as $course) {
         echo "<tr>";
-        echo "<td>" . $course["number"] . "</td><td><p dir=\"rtl\">" . $course["name"] . "</p></td><td><p dir=\"rtl\">" . $course["prereqs"] . "</p></td><td><p dir=\"rtl\">" . $course["adjs"] . "</p></td>";
+        echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
+            "</p></td><td><p dir=\"rtl\">" . $course->{"prereqs"} . "</p></td><td><p dir=\"rtl\">" .
+            $course->{"adjs"} . "</p></td>";
         echo "</tr>";
 
     }
