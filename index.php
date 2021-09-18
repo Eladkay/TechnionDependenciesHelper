@@ -91,7 +91,7 @@
     echo "<table class='table table-hover caption-top'>";
 
     echo "<caption>Courses you can take (with the correct tzmudim):</caption>";
-    echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Adjacent (Tzmudim)</th><th>UG Link</th></tr>
+    echo "<thead><tr><th>Course Number</th><th>Course Name</th><th>Requirements</th><th>Adjacent (Tzmudim)</th></tr>
      </thead><tbody>";
     $courses_took = trim($_POST["courses"]);
     $matches = array();
@@ -134,6 +134,7 @@
             return "<a href='https://ug3.technion.ac.il/rishum/course/$val[0]/202101'>$val[0]</a>";
         };
         $to_ugified2 = function($val) {
+            if($val == "") return "";
             return "<a href='https://ug3.technion.ac.il/rishum/course/$val/202101'>$val</a>";
         };
         $preqs = preg_replace("/\s+/", "", $course->{"preqs"});
@@ -146,8 +147,8 @@
         $adjs = preg_replace("(\s)", " or ", $adjs);
 
         echo "<tr>";
-        echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
-            "</p></td><td>$preqs</td><td>$adjs</td><td><a href='https://ug3.technion.ac.il/rishum/course/".$course->{"number"}."/202101'>Here</a></td>";
+        echo "<td>" . $to_ugified2($course->{"number"}) . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
+            "</p></td><td>$preqs</td><td>$adjs</td>";
         echo "</tr>";
 
     }
