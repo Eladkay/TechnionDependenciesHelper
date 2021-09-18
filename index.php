@@ -88,7 +88,7 @@
     </form>
     <br>
     <?php
-    if(isset($_POST['courses'])) return;
+    if(!isset($_POST['courses'])) return;
     echo "<table class='table table-hover caption-top'>";
 
     echo "<caption>Courses you can take (with the correct tzmudim):</caption>";
