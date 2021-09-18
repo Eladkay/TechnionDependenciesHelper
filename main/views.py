@@ -100,7 +100,7 @@ def get_possible_courses(request):
             if not preqs and not exclude_no_deps:
                 deps_set_used = []
                 adjs = list(map(lambda x: x.required, models.Adjacent.objects.all().filter(requires=course.course_number)))
-                ret.add((course, deps_set_used, adjs))
+                ret.add((course, adjs))
             for preq_set in preqs:
                 courses_in_set = models.PrerequisiteSet.objects.all().filter(prerequisite_id=preq_set)
                 course_numbers = map(lambda x: x.earlier_course, courses_in_set)
@@ -111,8 +111,8 @@ def get_possible_courses(request):
                 if flag:
                     deps_set_used = course_numbers
                     adjs = map(lambda x: x.required, models.Adjacent.objects.all().filter(requires=course.course_number))
-                    ret.add((course, deps_set_used, adjs))
-        return Response(map(lambda x: {"name": x[0].name, "number": x[0].course_number, "pts": x[0].points, "preqs": x[1], "adjs": x[2]}, ret), status=status.HTTP_200_OK)
+                    ret.add((course, adjs))
+        return Response(map(lambda x: {"name": x[0].name, "number": x[0].course_number, "pts": x[0].points, "preqs": x[0].original_preqs, "adjs": x[2]}, ret), status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
