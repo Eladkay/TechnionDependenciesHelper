@@ -134,11 +134,11 @@ def get_dependent_courses(request):
             return Response({"message": "no course was submitted"}, status=status.HTTP_400_BAD_REQUEST)
         course = models.Course.objects.all().filter(course_number=data["course"])
         if not course:
-            return Response({"message": "invalid course was submitted"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": f"invalid course was submitted '{data['course']}'"}, status=status.HTTP_400_BAD_REQUEST)
         sets = models.PrerequisiteSet.objects.all().filter(earlier_course=data["course"])
         courses = map(lambda x: x, set(map(lambda x: models.Course.objects.get(course_number=x.prerequisite_id.later_course), sets)))
         return Response(map(
-            lambda x: {"name": x.name, "number": x.course_number, "pts": x.points, "preqs": x.original_preqs,
-                       "adjs": x.original_adjs}, courses), status=status.HTTP_200_OK)
+            lambda x: {"name": x.name, "number": x.course_number, "pts": float(str(x.points)), "preqs": x.original_preqs.replace(u'\xa0', u''),
+                       "adjs": x.original_adjs.replace(u'\xa0', u' ')}, courses), status=status.HTTP_200_OK)
     except Exception as e:
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
