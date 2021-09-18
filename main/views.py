@@ -84,7 +84,6 @@ def get_possible_courses(request):
         if "filter" in data:
             filter = data["filter"]
         ret = set()
-        deps_set_used = []
         for course in models.Course.objects.all():
             if course.course_number in courses or filter not in course.course_number:
                 continue
@@ -127,13 +126,17 @@ def get_possible_courses(request):
 @api_view(['POST'])
 def get_dependent_courses(request):
     try:
-        if "course" not in request.data:
+        data = request.data
+        if "_content" in data:  # for debug
+            data = json.loads(request.data["_content"])
+            print(request.data["_content"])
+        if "course" not in data:
             return Response({"message": "no course was submitted"}, status=status.HTTP_400_BAD_REQUEST)
-        course = models.Course.objects.all().filter(course_number=request.data["course"])
+        course = models.Course.objects.all().filter(course_number=data["course"])
         if not course:
             return Response({"message": "invalid course was submitted"}, status=status.HTTP_400_BAD_REQUEST)
-        sets = models.PrerequisiteSet.objects.all().filter(earlier_course=request.data["course"])
-        courses = map(lambda x: models.Course.objects.get(course_number=x.prerequisite_id.later_course), sets)
+        sets = models.PrerequisiteSet.objects.all().filter(earlier_course=data["course"])
+        courses = map(lambda x: x, set(map(lambda x: models.Course.objects.get(course_number=x.prerequisite_id.later_course), sets)))
         return Response(map(
             lambda x: {"name": x.name, "number": x.course_number, "pts": x.points, "preqs": x.original_preqs,
                        "adjs": x.original_adjs}, courses), status=status.HTTP_200_OK)
