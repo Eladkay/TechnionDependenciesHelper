@@ -110,7 +110,7 @@
     $to_json["courses"] = $list;
     $json = json_encode($to_json);
     echo $json;
-    $url = 'https://eladkay.com:3001/';
+    $url = 'https://eladkay.com:3001/get_possible_courses/';
     $fields_string = http_build_query($to_json);
 
     //open connection
