@@ -48,14 +48,14 @@
             <input class="form-check-input" type="checkbox" name="filter" id="filter"
                    value="yes" checked>
             <label class="form-check-label" for="filter">
-                Filter subjects with no dependencies
+                Don't include subjects with no dependencies
             </label>
             <br>
 
             <input class="form-check-input" type="checkbox" name="filter_equiv" id="filter_equiv"
                    value="yes" checked>
             <label class="form-check-label" for="filter_equiv">
-                Filter subjects that overlap with, are incorporated in, or incorporate courses you have already
+                Don't include subjects that overlap with, are incorporated in, or incorporate courses you have already
                 completed
             </label>
         </div>
