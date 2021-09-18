@@ -137,8 +137,14 @@
         $to_ugified = function($val) {
             return "<a href='https://ug3.technion.ac.il/rishum/course/$val[0]/202101'>$val[0]</a>";
         };
+        $to_ugified2 = function($val) {
+            return "<a href='https://ug3.technion.ac.il/rishum/course/$val/202101'>$val</a>";
+        };
         $preqs = preg_replace_callback("(\\d{5,6})", $to_ugified, $course->{"preqs"});
-        $adjs_list = array_map($to_ugified, $course->{"adjs"});
+        $preqs = preg_replace("\\s{2,}", " ", $preqs);
+        $preqs = preg_replace("או", "or", $preqs);
+        $preqs = preg_replace("ו-", "and", $preqs);
+        $adjs_list = array_map($to_ugified2, $course->{"adjs"});
         $adjs = join(" or ", $adjs_list);
         echo "<tr>";
         echo "<td>" . $course->{"number"} . "</td><td><p dir=\"rtl\">" . $course->{"name"} .
