@@ -62,7 +62,7 @@ def create_courses_database(req):
 def get_possible_courses(request):
     try:
         if "courses" not in request.data:
-            return Response({"message": "no courses were submitted"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"message": f"no courses were submitted, data is {request.data}"}, status=status.HTTP_400_BAD_REQUEST)
         courses = request.data["courses"]
         exclude_no_deps = False
         if "exclude_no_deps" in request.data:
