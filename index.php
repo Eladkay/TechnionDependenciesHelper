@@ -98,7 +98,7 @@
     preg_match_all("(\\d{5,6})", $courses_took, $matches);
     $list = [];
     foreach ($matches as $match) {
-        echo $match;
+        print_r($match);
     }
 //    foreach ($data as $course) {
 //            if (!isset($course["general"]["מקצועות קדם"]) || check_kdamim($course["general"]["מקצועות קדם"], $courses_took)) {
