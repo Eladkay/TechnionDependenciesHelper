@@ -137,7 +137,7 @@
         $to_ugified = function($val) {
             return "<a href='https://ug3.technion.ac.il/rishum/course/$val/202101'>$val</a>";
         };
-        $preqs = preg_replace_callback("\\d{5,6}", $to_ugified, $course->{"preqs"});
+        $preqs = preg_replace_callback("(\\d{5,6})", $to_ugified, $course->{"preqs"});
         $adjs_list = array_map($to_ugified, $course->{"adjs"});
         $adjs = join(" or ", $adjs_list);
         echo "<tr>";
