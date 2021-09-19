@@ -113,10 +113,7 @@ def get_possible_courses(request):
                     ret.add(course)
         result = map(lambda x: {"name": x.name, "number": x.course_number, "pts": float(str(x.points)),
                        "preqs": x.original_preqs.replace(u'\xa0', u''), "adjs": x.original_adjs.replace(u'\xa0', u' ')}, ret)
-        f = open("test.json", "w", encoding="utf8")
         v = sorted(result, key=lambda x: x["number"])
-        f.write(str(v[0]))
-        f.close()
         return Response(v, status=status.HTTP_200_OK)
     except Exception as e:
         print(e)
