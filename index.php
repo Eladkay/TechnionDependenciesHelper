@@ -129,7 +129,6 @@
 
     //execute post
     $result = curl_exec($ch);
-    echo curl_getinfo($ch);
     curl_close($ch);
 
     foreach (json_decode($result) as $course) {
