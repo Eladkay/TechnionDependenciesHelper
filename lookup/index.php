@@ -50,13 +50,16 @@
     $to_json = array();
     $to_json["course"] = $course;
     $json = json_encode($to_json);
-    $url = 'https://eladkay.com:3001/get_dependent_courses/';
+    $url = 'https://127.0.0.1:3001/get_dependent_courses/';
     //open connection
     $ch = curl_init($url);
 
     //set the url, number of POST vars, POST data
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
 
     //So that curl_exec returns the contents of the cURL; rather than echoing it
