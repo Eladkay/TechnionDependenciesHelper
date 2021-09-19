@@ -131,9 +131,7 @@
 
     //execute post
     $result = curl_exec($ch);
-    echo $result;
-    print_r(curl_getinfo($ch, CURLINFO_HTTP_CODE));
-    echo curl_error($ch);
+
     curl_close($ch);
 
     foreach (json_decode($result) as $course) {
