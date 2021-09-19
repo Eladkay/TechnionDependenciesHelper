@@ -119,6 +119,7 @@ def get_possible_courses(request):
         f.close()
         return Response(v, status=status.HTTP_200_OK)
     except Exception as e:
+        print(e)
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -141,4 +142,5 @@ def get_dependent_courses(request):
             lambda x: {"name": x.name, "number": x.course_number, "pts": float(str(x.points)), "preqs": x.original_preqs.replace(u'\xa0', u''),
                        "adjs": x.original_adjs.replace(u'\xa0', u' ')}, courses), status=status.HTTP_200_OK)
     except Exception as e:
+        print(e)
         return Response({"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
