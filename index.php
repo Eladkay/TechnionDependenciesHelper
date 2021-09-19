@@ -113,7 +113,7 @@
     if (isset($_POST["chem"]) && $_POST["chem"] == "yes") $to_json["chem"] = true;
     if (isset($_POST["digits"])) $to_json["filter"] = $_POST["digits"];
     $json = json_encode($to_json);
-    $url = 'https://eladkay.com:3001/get_possible_courses/';
+    $url = 'https://127.0.0.1:3001/get_possible_courses/';
 
     //open connection
     $ch = curl_init($url);
