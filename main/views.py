@@ -129,9 +129,11 @@ def get_dependent_courses(request):
             data = json.loads(request.data["_content"])
             print(request.data["_content"])
         if "course" not in data:
+            print(data)
             return Response({"message": "no course was submitted"}, status=status.HTTP_400_BAD_REQUEST)
         course = models.Course.objects.all().filter(course_number=data["course"])
         if not course:
+            print(data['course'])
             return Response({"message": f"invalid course was submitted '{data['course']}'"}, status=status.HTTP_400_BAD_REQUEST)
         sets = models.PrerequisiteSet.objects.all().filter(earlier_course=data["course"])
         courses = map(lambda x: x, set(map(lambda x: models.Course.objects.get(course_number=x.prerequisite_id.later_course), sets)))
