@@ -19,6 +19,7 @@
 </head>
 <body>
 <div class="container">
+    <form method="post">
     <select class="form-select" aria-label="Semester" id="semester" name="semester">
         <option value="202101" selected>Winter 2021-2022</option>
         <option value="202002">Spring 2021</option>
@@ -32,7 +33,6 @@
     <a href="https://github.com/Eladkay/TechnionDependenciesHelper"> GitHub for issues and suggestions </a>
     <p> Enter here the course numbers you took, in any format, and we will tell you what courses you can
         take! You can copy-paste everything (CTRL+A) from <a href="http://ug3.technion.ac.il/Tadpis.html">this page.</a></p> <br>
-    <form method="post">
         <div class="input-group">
             <label for="courses">
                 String containing course numbers:&nbsp;&nbsp;&nbsp;
