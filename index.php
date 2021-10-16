@@ -19,7 +19,12 @@
 </head>
 <body>
 <div class="container">
-
+    <select class="form-select" aria-label="Semester" id="semester" name="semester">
+        <option value="202101" selected>Winter 2021-2022</option>
+        <option value="202002">Spring 2021</option>
+        <option value="202001">Winter 2020-2021</option>
+        <option value="201902">Spring 2020</option>
+    </select>
     <div style="text-align: center;"><h1> Technion Dependency Helper v2 </h1></div>
     <h2><b> BETA </b>, report bugs! </h2>
     <p> Updated Sep 18th, 2021 </p>
@@ -106,6 +111,7 @@
     }
     $to_json = array();
     $to_json["courses"] = $list;
+    $to_json["semester"] = $_POST["semester"];
     $to_json["exclude_no_deps"] = isset($_POST["filter"]) && $_POST["filter"] == "yes";
     $to_json["exclude_contained"] = isset($_POST["filter_equiv"]) && $_POST["filter_equiv"] == "yes";
     if (isset($_POST["phys1"]) && $_POST["phys1"] == "yes") $to_json["phys_mech"] = true;
