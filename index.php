@@ -93,6 +93,7 @@
     </form>
     <br>
     <?php
+    echo $_POST["semester"];
     if (!isset($_POST['courses']) || !strlen($_POST["courses"])) return;
     echo "<table class='table table-hover caption-top'>";
 
@@ -139,11 +140,11 @@
 
     foreach (json_decode($result) as $course) {
         $to_ugified = function($val) {
-            return "<a href='https://ug3.technion.ac.il/rishum/course/$val[0]/202101'>$val[0]</a>";
+            return "<a href='https://ug3.technion.ac.il/rishum/course/$val[0]/".$_POST["semester"]."'>$val[0]</a>";
         };
         $to_ugified2 = function($val) {
             if($val == "") return "";
-            return "<a href='https://ug3.technion.ac.il/rishum/course/$val/202101'>$val</a>";
+            return "<a href='https://ug3.technion.ac.il/rishum/course/$val/".$_POST["semester"]."'>$val</a>";
         };
         $preqs = preg_replace("/\s+/", "", $course->{"preqs"});
         $preqs = preg_replace('/[\x00-\x1F\x7F]/u', '', $preqs);
