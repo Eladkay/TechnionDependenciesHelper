@@ -23,8 +23,8 @@
     <select class="form-select" aria-label="Semester" id="semester" name="semester">
         <option value="202101" selected>Winter 2021-2022</option>
         <option value="202002">Spring 2021</option>
-        <option value="202001">Winter 2020-2021</option>
-        <option value="201902">Spring 2020</option>
+        <!--<option value="202001">Winter 2020-2021</option>
+        <option value="201902">Spring 2020</option>-->
     </select>
     <div style="text-align: center;"><h1> Technion Dependency Helper v2 </h1></div>
     <h2><b> BETA </b>, report bugs! </h2>
@@ -93,7 +93,7 @@
     </form>
     <br>
     <?php
-    echo $_POST["semester"];
+
     if (!isset($_POST['courses']) || !strlen($_POST["courses"])) return;
     echo "<table class='table table-hover caption-top'>";
 
