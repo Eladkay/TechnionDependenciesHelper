@@ -28,7 +28,7 @@ def create_courses_database(req):
     if len(models.Course.objects.all()):
         return HttpResponse("DB not empty!")
 
-    f = open("courses_202101.json", encoding="utf8")
+    f = open("courses_202002.json", encoding="utf8")
     j = json.load(f)
     count = 0
     t = time.time()
@@ -39,7 +39,7 @@ def create_courses_database(req):
         course_obj = models.Course(course_number=course["מספר מקצוע"], name=course["שם מקצוע"],
                                    points=float(course["נקודות"]), has_prerequisites=(len(required) > 0),
                                    has_adjacents=(len(adjacent) > 0), original_preqs=course['מקצועות קדם'] if "מקצועות קדם" in course else "",
-                                   original_adjs=course['מקצועות צמודים'] if "מקצועות צמודים" in course else "")
+                                   original_adjs=course['מקצועות צמודים'] if "מקצועות צמודים" in course else "", semester="202002")
         course_obj.save()
         for c2 in contained:
             contained_obj = models.Contained(course1=course["מספר מקצוע"], course2=c2)
@@ -84,7 +84,7 @@ def get_possible_courses(request):
         if "filter" in data:
             filter = data["filter"]
         ret = set()
-        for course in models.Course.objects.all():
+        for course in models.Course.objects.all().filter(semester=data["semester"]):
             if course.course_number in courses or filter not in course.course_number:
                 continue
             if exclude_contained:

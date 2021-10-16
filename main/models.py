@@ -11,6 +11,7 @@ class Course(models.Model):
     has_adjacents = models.BooleanField()
     original_preqs = models.CharField(max_length=100)
     original_adjs = models.CharField(max_length=100)
+    semester = models.CharField(max_length=6)
 
 
 class Prerequisite(models.Model):
